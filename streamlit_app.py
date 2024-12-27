@@ -298,6 +298,7 @@ components.html("""
 
         function onPlayerReady(event) {
             document.addEventListener('keydown', function(event) {
+                console.log(event,player)
                 if (event.key === 'p') {
                     player.playVideo();
                 }
