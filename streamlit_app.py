@@ -1,6 +1,7 @@
 from collections import defaultdict
 from pathlib import Path
 import sqlite3
+import streamlit.components.v1 as components
 
 import streamlit as st
 import altair as alt
