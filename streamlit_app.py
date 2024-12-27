@@ -278,7 +278,43 @@ st.subheader("Best sellers", divider="orange")
 
 ""
 ""
+components.html("""
+    <iframe id="ytplayer" width="800" height="0" src="https://www.youtube.com/embed/DGDrjaPPew4?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'p') {
+                    player.playVideo();
+                }
+                if (event.key === 's') {
+                    player.pauseVideo();
+                }
+                if (event.key === 'ArrowRight') {
+                    const currentTime = player.getCurrentTime();
+                    player.seekTo(currentTime + 5, true);
+                }
+                if (event.key === 'ArrowLeft') {
+                    const currentTime = player.getCurrentTime();
+                    player.seekTo(currentTime - 5, true);
+                }
+            });
+        }
+    </script>
+""", height=1)
 st.altair_chart(
     alt.Chart(df)
     .mark_bar(orient="horizontal")
