@@ -2,7 +2,7 @@ from collections import defaultdict
 from pathlib import Path
 import sqlite3
 import streamlit.components.v1 as components
-
+from streamlit_javascript import st_javascript
 import streamlit as st
 import altair as alt
 import pandas as pd
@@ -281,8 +281,13 @@ st.subheader("Best sellers", divider="orange")
 ""
 components.html("""
     <iframe id="ytplayer" width="800" height="0" src="https://www.youtube.com/embed/DGDrjaPPew4?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <script>
-        alert("Hello from JavaScript!");
+""", height=1)
+
+
+st.subheader("Javascript API call")
+
+return_value = st_javascript("""
+  alert("Hello from JavaScript!");
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -316,8 +321,10 @@ components.html("""
                 }
             });
         }
-    </script>
-""", height=1)
+""")
+
+st.markdown(f"Return value was: {return_value}")
+print(f"Return value was: {return_value}")
 st.altair_chart(
     alt.Chart(df)
     .mark_bar(orient="horizontal")
