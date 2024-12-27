@@ -282,6 +282,7 @@ st.subheader("Best sellers", divider="orange")
 components.html("""
     <iframe id="ytplayer" width="800" height="0" src="https://www.youtube.com/embed/DGDrjaPPew4?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <script>
+        alert("Hello from JavaScript!");
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
